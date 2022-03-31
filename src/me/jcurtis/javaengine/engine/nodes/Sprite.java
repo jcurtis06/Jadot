@@ -27,18 +27,6 @@ public class Sprite extends Node {
     }
 
     public void draw(Graphics g, ImageObserver observer) {
-        if (pos == null) {
-            if (getParent() != null) {
-                pos = getParent().getPos();
-                System.out.println("Found parent pos");
-                System.out.println(pos.toString());
-            } else {
-                pos = new Vector2(0, 0);
-                System.out.println("Defaulted to 0, 0");
-                System.out.println(pos.toString());
-            }
-        }
-
         g.drawImage(
                 sprite,
                 pos.x,

@@ -12,16 +12,16 @@ public class Main extends JavaEngine {
 
     public static void main(String[] args) {
         engine.initialize();
+
+        Player player = new Player();
+        player.setPos(new Vector2(200, 200));
+        player.addChild(new Sprite("images/player.png"));
+        new Sprite("images/player.png");
     
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 engine.initializeWindow(new Window("Test", false, 500, 500));
             }
         });
-
-        Player player = new Player();
-        player.setPos(new Vector2(200, 200));
-        player.addChild(new Sprite("images/player.png"));
-        new Sprite("images/player.png");
     }
 }

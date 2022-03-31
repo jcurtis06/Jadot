@@ -72,6 +72,14 @@ public class Node {
     public void onTreeEnter() {
         JavaEngine.registerNode(this);
         System.out.println("Registered a node");
+
+        if (getParent() != null) {
+            if (getParent().getPos() != getPos()) {
+                pos = getParent().getPos();
+            }
+        } else {
+            pos = new Vector2(0, 0);
+        }
     }
 
     public void update() {
