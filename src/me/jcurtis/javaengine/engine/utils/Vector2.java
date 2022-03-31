@@ -1,4 +1,4 @@
-package me.jcurtis.javaengine.utils;
+package me.jcurtis.javaengine.engine.utils;
 
 public class Vector2 {
     public int x;

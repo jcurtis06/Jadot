@@ -1,7 +1,7 @@
-package me.jcurtis.javaengine.nodes;
+package me.jcurtis.javaengine.engine.nodes;
 
 import me.jcurtis.javaengine.engine.JavaEngine;
-import me.jcurtis.javaengine.utils.Vector2;
+import me.jcurtis.javaengine.engine.utils.Vector2;
 
 import java.util.ArrayList;
 
@@ -9,11 +9,14 @@ public class Node {
     private final ArrayList<Node> children = new ArrayList<>();
 
     public Node parent;
+    protected NodeType type;
     public Vector2 pos;
     public String name;
 
-    public Node() {
+    public Node(NodeType nodeType) {
         onTreeEnter();
+
+        this.type = nodeType;
     }
 
     public void setName(String name) {
@@ -62,8 +65,20 @@ public class Node {
         return this;
     }
 
+    public NodeType getType() {
+        return this.type;
+    }
+
     public void onTreeEnter() {
         JavaEngine.registerNode(this);
         System.out.println("Registered a node");
+    }
+
+    public void update() {
+        if (getParent() != null) {
+            if (getParent().getPos() != getPos()) {
+                pos = getParent().getPos();
+            }
+        }
     }
 }

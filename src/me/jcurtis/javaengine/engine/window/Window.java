@@ -1,6 +1,10 @@
-package me.jcurtis.javaengine.window;
+package me.jcurtis.javaengine.engine.window;
 
 import javax.swing.*;
+import java.awt.event.*;
+import me.jcurtis.javaengine.engine.JavaEngine;
+import me.jcurtis.javaengine.engine.input.Input;
+
 
 public class Window {
     String title;
@@ -17,7 +21,7 @@ public class Window {
         this.height = height;
     }
 
-    public JFrame init() {
+    public JFrame init(JavaEngine engine) {
         JFrame window = new JFrame(title);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -25,6 +29,10 @@ public class Window {
         window.setResizable(this.resizeable);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        Viewport viewport = new Viewport(engine);
+        window.add(viewport);
+        window.addKeyListener(new Input());
 
         return window;
     }
