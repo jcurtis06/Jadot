@@ -31,10 +31,8 @@ public class Viewport extends JPanel implements ActionListener {
 
         Graphics2D g2d = (Graphics2D) g;
 
-
-
         AffineTransform at = new AffineTransform();
-        at.scale(engine.mainCamera.scale.x, engine.mainCamera.scale.y);
+        at.scale(JavaEngine.mainCamera.scale.x, JavaEngine.mainCamera.scale.y);
 
         g2d.transform(at);
 

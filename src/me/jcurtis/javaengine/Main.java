@@ -34,6 +34,7 @@ public class Main extends JavaEngine {
         testBody.addChild(newSprite);
 
         CameraController camera2D = new CameraController();
+        camera2D.setScale(new Vector2(2, 2));
         camera2D.setPos(new Vector2(0, 0));
 
         root.addChild(camera2D);

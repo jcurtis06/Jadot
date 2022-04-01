@@ -15,6 +15,10 @@ public class Camera2D extends Node {
         this.height = height;
     }
 
+    public void setScale(Vector2 vector2) {
+        this.scale = vector2;
+    }
+
     @Override
     public void update() {
         super.update();
