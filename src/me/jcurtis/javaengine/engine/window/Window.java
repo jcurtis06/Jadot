@@ -1,7 +1,6 @@
 package me.jcurtis.javaengine.engine.window;
 
 import javax.swing.*;
-import java.awt.event.*;
 import me.jcurtis.javaengine.engine.JavaEngine;
 import me.jcurtis.javaengine.engine.input.Input;
 

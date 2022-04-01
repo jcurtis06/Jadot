@@ -2,8 +2,6 @@ package me.jcurtis.javaengine.engine.nodes;
 
 import javax.imageio.ImageIO;
 
-import me.jcurtis.javaengine.engine.utils.Vector2;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -29,8 +27,8 @@ public class Sprite extends Node {
     public void draw(Graphics g, ImageObserver observer) {
         g.drawImage(
                 sprite,
-                pos.x,
-                pos.y,
+                pos.getX(),
+                pos.getY(),
                 observer
         );
     }
@@ -38,6 +36,5 @@ public class Sprite extends Node {
     @Override
     public void onTreeEnter() {
         super.onTreeEnter();
-        System.out.println("with the type Sprite");
     }
 }

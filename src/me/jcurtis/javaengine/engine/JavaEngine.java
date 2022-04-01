@@ -1,6 +1,8 @@
 package me.jcurtis.javaengine.engine;
 
+import me.jcurtis.javaengine.engine.nodes.CollisionRect2D;
 import me.jcurtis.javaengine.engine.nodes.Node;
+import me.jcurtis.javaengine.engine.nodes.NodeType;
 import me.jcurtis.javaengine.engine.window.Window;
 
 import java.util.ArrayList;
@@ -9,13 +11,19 @@ public class JavaEngine {
     public Window window;
 
     public static final ArrayList<Node> nodes = new ArrayList<>();
+    public static final ArrayList<CollisionRect2D> colliders = new ArrayList<>();
 
     public static void registerNode(Node node) {
         nodes.add(node);
     }
 
     public void initialize() {
-        System.out.println("Game Started");
+        for (Node n : nodes) {
+            if (n.getType().equals(NodeType.COLLISIONRECT)) {
+                CollisionRect2D cr = (CollisionRect2D) n;
+                colliders.add(cr);
+            }
+        }
     }
 
     public void initializeWindow(Window window) {

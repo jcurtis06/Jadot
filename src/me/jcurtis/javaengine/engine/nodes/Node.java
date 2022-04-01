@@ -12,8 +12,12 @@ public class Node {
     protected NodeType type;
     public Vector2 pos;
     public String name;
+    public Vector2 offset;
 
     public Node(NodeType nodeType) {
+        this.offset = new Vector2(0, 0);
+        this.pos = new Vector2(0, 0);
+
         onTreeEnter();
 
         this.type = nodeType;
@@ -28,7 +32,6 @@ public class Node {
     }
 
     public void addChild(Node node) {
-        System.out.println("Added child " + node);
         node.setParent(this);
         children.add(node);
     }
@@ -61,6 +64,14 @@ public class Node {
         return this.pos;
     }
 
+    public void setOffset(Vector2 vector2) {
+        this.offset = vector2;
+    }
+
+    public Vector2 getOffset() {
+        return this.offset;
+    }
+
     public Node getNode() {
         return this;
     }
@@ -71,7 +82,6 @@ public class Node {
 
     public void onTreeEnter() {
         JavaEngine.registerNode(this);
-        System.out.println("Registered a node");
 
         if (getParent() != null) {
             if (getParent().getPos() != getPos()) {
@@ -83,10 +93,8 @@ public class Node {
     }
 
     public void update() {
-        if (getParent() != null) {
-            if (getParent().getPos() != getPos()) {
-                pos = getParent().getPos();
-            }
+        if (getParent() != null && getParent().getType() != NodeType.ROOT) {
+            this.setPos(getParent().getPos().addVec(offset));
         }
     }
 }

@@ -16,7 +16,7 @@ public class Viewport extends JPanel implements ActionListener, KeyListener {
 
     public Viewport(JavaEngine engine) {
         this.engine = engine;
-        timer = new Timer(25, this);
+        timer = new Timer(5, this);
         timer.start();
 
         setFocusable(true);
