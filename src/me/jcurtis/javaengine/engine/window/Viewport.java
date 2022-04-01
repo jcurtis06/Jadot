@@ -3,6 +3,7 @@ package me.jcurtis.javaengine.engine.window;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
 
 import me.jcurtis.javaengine.engine.JavaEngine;
 import me.jcurtis.javaengine.engine.input.Input;
@@ -27,6 +28,16 @@ public class Viewport extends JPanel implements ActionListener, KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+
+
+
+        AffineTransform at = new AffineTransform();
+        at.scale(engine.mainCamera.scale.x, engine.mainCamera.scale.y);
+
+        g2d.transform(at);
+
         for (Node node : JavaEngine.nodes) {
             if (node.getType() == NodeType.SPRITE) {
                 Sprite sprite = (Sprite) node;
