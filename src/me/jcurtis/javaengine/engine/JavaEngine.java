@@ -1,5 +1,6 @@
 package me.jcurtis.javaengine.engine;
 
+import me.jcurtis.javaengine.engine.nodes.Camera2D;
 import me.jcurtis.javaengine.engine.nodes.CollisionRect2D;
 import me.jcurtis.javaengine.engine.nodes.Node;
 import me.jcurtis.javaengine.engine.nodes.NodeType;
@@ -12,6 +13,7 @@ public class JavaEngine {
 
     public static final ArrayList<Node> nodes = new ArrayList<>();
     public static final ArrayList<CollisionRect2D> colliders = new ArrayList<>();
+    public static Camera2D mainCamera = null;
 
     public static void registerNode(Node node) {
         nodes.add(node);
@@ -22,6 +24,11 @@ public class JavaEngine {
             if (n.getType().equals(NodeType.COLLISIONRECT)) {
                 CollisionRect2D cr = (CollisionRect2D) n;
                 colliders.add(cr);
+            }
+
+            if (n.getType().equals(NodeType.CAMERA2D)) {
+                System.out.println("found main cam");
+                mainCamera = (Camera2D) n;
             }
         }
     }

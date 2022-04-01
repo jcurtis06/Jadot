@@ -11,6 +11,9 @@ import java.io.IOException;
 public class Sprite extends Node {
     private BufferedImage sprite;
 
+    public int width;
+    public int height;
+
     public Sprite(String resPath) {
         super(NodeType.SPRITE);
         loadImage(resPath);
@@ -31,6 +34,11 @@ public class Sprite extends Node {
                 pos.getY(),
                 observer
         );
+    }
+
+    public void setSize(int width, int height) {
+        this.width = width;
+        this.height = height;
     }
 
     @Override
