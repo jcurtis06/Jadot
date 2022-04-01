@@ -21,6 +21,7 @@ public class JavaEngine {
 
     public void initialize() {
         for (Node n : nodes) {
+            System.out.println("found " + n.getType());
             if (n.getType().equals(NodeType.COLLISIONRECT)) {
                 CollisionRect2D cr = (CollisionRect2D) n;
                 colliders.add(cr);

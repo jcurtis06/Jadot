@@ -28,10 +28,11 @@ public class Sprite extends Node {
     }
 
     public void draw(Graphics g, ImageObserver observer) {
+        System.out.println(getTreeRoot().getMainCamera().getPos().toString());
         g.drawImage(
                 sprite,
-                pos.getX(),
-                pos.getY(),
+                pos.getX() - getTreeRoot().getMainCamera().getPos().getX(),
+                pos.getY() - getTreeRoot().getMainCamera().getPos().getY(),
                 observer
         );
     }

@@ -6,5 +6,7 @@ public enum NodeType {
     KINEMATICBODY2D,
     COLLISIONRECT,
     ROOT,
-    CAMERA2D
+    CAMERA2D,
+    TILEMAP,
+    CELL
 }

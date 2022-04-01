@@ -22,16 +22,6 @@ public class Camera2D extends Node {
     @Override
     public void update() {
         super.update();
-
-        for (Node node : JavaEngine.nodes) {
-            if (node.getType().equals(NodeType.SPRITE)) {
-                Sprite other = (Sprite) node;
-
-                if (overlaps(other)) {
-                    other.setPos(other.getPos().subVec(this.getPos()));
-                }
-            }
-        }
     }
 
     private boolean overlaps(Sprite other) {

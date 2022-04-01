@@ -1,0 +1,3 @@
+# Space is an empty tile
+# O is a block
+OOOOOOO OOOOOO OOOOOO OOOOOO OOOOOO OOOOO

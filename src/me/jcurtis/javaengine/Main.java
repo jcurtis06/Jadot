@@ -1,7 +1,5 @@
 package me.jcurtis.javaengine;
 
-import java.util.ArrayList;
-
 import javax.swing.SwingUtilities;
 
 import me.jcurtis.javaengine.engine.JavaEngine;
@@ -16,30 +14,8 @@ public class Main extends JavaEngine {
         Root root = new Root();
 
         Player player = new Player();
-        player.setPos(new Vector2(200, 200));
-        player.setOffset(new Vector2(0, 0));
-        player.addChild(new Sprite("images/player.png"));
-        CollisionRect2D collisionRect2D = new CollisionRect2D(16, 16);
-        collisionRect2D.setPos(new Vector2(10, 10));
-        collisionRect2D.setOffset(new Vector2(0, 16));
-        player.addChild(collisionRect2D);
 
-        Node testBody = new Node(NodeType.NODE);
-        testBody.setPos(new Vector2(50, 50));
-
-        Sprite newSprite = new Sprite("images/player2.png");
-        newSprite.setSize(16, 16);
-        newSprite.setOffset(new Vector2(0, 0));
-
-        testBody.addChild(newSprite);
-
-        CameraController camera2D = new CameraController();
-        camera2D.setScale(new Vector2(2, 2));
-        camera2D.setPos(new Vector2(0, 0));
-
-        root.addChild(camera2D);
         root.addChild(player);
-        root.addChild(testBody);
 
         engine.initialize();
         SwingUtilities.invokeLater(new Runnable() {
