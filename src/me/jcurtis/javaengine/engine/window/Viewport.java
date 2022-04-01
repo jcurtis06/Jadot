@@ -10,7 +10,7 @@ import me.jcurtis.javaengine.engine.nodes.Node;
 import me.jcurtis.javaengine.engine.nodes.NodeType;
 import me.jcurtis.javaengine.engine.nodes.Sprite;
 
-public class Viewport extends JPanel implements ActionListener, KeyListener {
+public class Viewport extends JPanel implements ActionListener {
     private Timer timer;
     private JavaEngine engine;
 
@@ -39,23 +39,5 @@ public class Viewport extends JPanel implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         engine.update();
         repaint();
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        System.out.println("HELLO");
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("HELLO");
-        
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        System.out.println("HELLO");
     }
 }

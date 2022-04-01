@@ -5,5 +5,4 @@ public class AnimatedSprite extends Node {
         super(nodeType);
         //TODO Auto-generated constructor stub
     }
-    
 }

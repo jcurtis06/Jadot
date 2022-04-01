@@ -1,5 +1,7 @@
 package me.jcurtis.javaengine;
 
+import java.util.ArrayList;
+
 import javax.swing.SwingUtilities;
 
 import me.jcurtis.javaengine.engine.JavaEngine;
@@ -22,15 +24,28 @@ public class Main extends JavaEngine {
 
         CollisionRect2D collisionRect2D = new CollisionRect2D(16, 16);
         collisionRect2D.setPos(new Vector2(10, 10));
-        collisionRect2D.setOffset(new Vector2(0, 16));
 
         player.addChild(collisionRect2D);
+
+        ArrayList<CollisionRect2D> cr2ds = new ArrayList<>();
 
         CollisionRect2D object = new CollisionRect2D(16, 16);
         object.setName("test object");
         object.setPos(new Vector2(100, 100));
         object.setOffset(new Vector2(0, 0));
         object.addChild(new Sprite("images/player.png"));
+        
+        for (int i = 0; i < 20; i++) {
+            CollisionRect2D obj = new CollisionRect2D(16, 16);
+            obj.setName("test object");
+            obj.setPos(new Vector2(i*20, 100));
+            obj.setOffset(new Vector2(0, 0));
+            obj.addChild(new Sprite("images/player.png"));
+
+            root.addChild(obj);
+
+            cr2ds.add(obj);
+        }
         
         root.addChild(player);
         root.addChild(object);
