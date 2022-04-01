@@ -5,5 +5,6 @@ public enum NodeType {
     SPRITE,
     KINEMATICBODY2D,
     COLLISIONRECT,
-    ROOT
+    ROOT,
+    CAMERA2D
 }

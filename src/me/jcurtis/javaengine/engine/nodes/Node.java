@@ -82,14 +82,6 @@ public class Node {
 
     public void onTreeEnter() {
         JavaEngine.registerNode(this);
-
-        if (getParent() != null) {
-            if (getParent().getPos() != getPos()) {
-                pos = getParent().getPos();
-            }
-        } else {
-            pos = new Vector2(0, 0);
-        }
     }
 
     public void update() {
