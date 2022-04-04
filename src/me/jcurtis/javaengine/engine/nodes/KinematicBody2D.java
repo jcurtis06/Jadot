@@ -9,21 +9,19 @@ public class KinematicBody2D extends Node {
 
     public KinematicBody2D() {
         super(NodeType.KINEMATICBODY2D);
-
         if (collisionRect2Ds == null) System.out.println("WARNING: KinematicBody2D doesn't have a CollisionRect2D!");
     }
 
-    public void applyVelocity(Vector2 vector2) {
-        setPos(this.pos.addVec(vector2));
+    public void applyVelocity(Vector2 velocity) {
+        this.setPos(this.pos.addVec(velocity));
 
         if (collisionRect2Ds == null) return;
         for (CollisionRect2D cr2d : collisionRect2Ds) {
-            cr2d.update();
             if (cr2d.checkCollisions()) {
-                setPos(this.pos.subVec(vector2));
-                return;
+                this.setPos(this.pos.subVec(velocity));
             }
         }
+        
     }
 
     @Override

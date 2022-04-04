@@ -1,6 +1,7 @@
 package me.jcurtis.javaengine;
 
 import me.jcurtis.javaengine.engine.input.Input;
+import me.jcurtis.javaengine.engine.nodes.Camera2D;
 import me.jcurtis.javaengine.engine.nodes.CollisionRect2D;
 import me.jcurtis.javaengine.engine.nodes.KinematicBody2D;
 import me.jcurtis.javaengine.engine.nodes.Sprite;
@@ -9,7 +10,7 @@ import me.jcurtis.javaengine.engine.utils.Vector2;
 import java.awt.event.*;
 
 public class Player extends KinematicBody2D {
-    final int speed = 5;
+    final int speed = 1;
     
     private Vector2 vel = new Vector2(0, 0);
 
@@ -36,22 +37,24 @@ public class Player extends KinematicBody2D {
             vel.y -= 1;
         }
 
-        applyVelocity(new Vector2(vel.x*speed, 0));
-        applyVelocity(new Vector2(0, vel.y*speed));
+        applyVelocity(vel);
     }
 
     @Override
     public void onTreeEnter() {
-        System.out.println("reached");
         super.onTreeEnter();
 
-        CameraController playerCamera = new CameraController();
+        Camera2D playerCamera = new Camera2D(500, 500);
         playerCamera.setOffset(new Vector2(-90, -90));
         this.addChild(playerCamera);
 
         getTreeRoot().setMainCamera(playerCamera);
 
-        this.addChild(new Sprite("images/player.png"));
-        this.addChild(new CollisionRect2D(16, 16));
+        this.addChild(new Sprite("images/player1.png"));
+
+        CollisionRect2D cr2d = new CollisionRect2D(16, 16);
+        cr2d.setName("Player");
+
+        this.addChild(cr2d);
     }
 }

@@ -38,6 +38,10 @@ public class Vector2 {
         return new Vector2(this.x * num, this.y * num);
     }
 
+    public Vector2 addAll(double num) {
+        return new Vector2(this.x + num, this.y + num);
+    }
+
     public Vector2 addVec(Vector2 vector2) {
         return new Vector2(this.x + vector2.x, this.y + vector2.y);
     }

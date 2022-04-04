@@ -8,5 +8,6 @@ public enum NodeType {
     ROOT,
     CAMERA2D,
     TILEMAP,
-    CELL
+    CELL,
+    LINE2D
 }

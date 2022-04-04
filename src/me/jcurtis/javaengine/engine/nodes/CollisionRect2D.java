@@ -1,10 +1,15 @@
 package me.jcurtis.javaengine.engine.nodes;
 
+import java.util.ArrayList;
+import java.awt.Rectangle;
+
 import me.jcurtis.javaengine.engine.JavaEngine;
+import me.jcurtis.javaengine.engine.utils.Vector2;
 
 public class CollisionRect2D extends Node {
     public int width = 0;
     public int height = 0;
+    public CollisionRect2D collided;
 
     public CollisionRect2D(int width, int height) {
         super(NodeType.COLLISIONRECT);
@@ -16,20 +21,19 @@ public class CollisionRect2D extends Node {
     public boolean checkCollisions() {
         for (CollisionRect2D other : JavaEngine.colliders) {
             if (other == this) continue;
-
-            if (pos.x < other.pos.x + other.width &&
-                pos.x + width > other.pos.x &&
-                pos.y < other.pos.y + other.height &&
-                pos.y + height > other.pos.y
-            ) {
-                collided();
+            if (this.getBounds().intersects(other.getBounds())) {
+                this.collided = other;
                 return true;
             }
         }
         return false;
     }
 
-    public void collided() {
-        
+    public Rectangle getBounds() {
+        return new Rectangle(this.pos.getX(), this.pos.getY(), this.width, this.height);
+    }
+
+    public CollisionRect2D getCollided() {
+        return this.collided;
     }
 }
