@@ -29,6 +29,24 @@ public class CollisionRect2D extends Node {
         return false;
     }
 
+    public boolean checkCollisionsAt(Vector2 newPos) {
+        int x2 = newPos.getX(), y2 = newPos.getY();
+
+        Rectangle future = new Rectangle(x2, y2, width, height);
+
+        for (CollisionRect2D cr2d : JavaEngine.colliders) {
+            if (cr2d == this) {
+                continue;
+            }
+
+            if (cr2d.getBounds().intersects(future)) {
+                System.out.println("OH NO!");
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Rectangle getBounds() {
         return new Rectangle(this.pos.getX(), this.pos.getY(), this.width, this.height);
     }

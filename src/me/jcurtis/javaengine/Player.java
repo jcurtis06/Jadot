@@ -10,7 +10,7 @@ import me.jcurtis.javaengine.engine.utils.Vector2;
 import java.awt.event.*;
 
 public class Player extends KinematicBody2D {
-    final int speed = 1;
+    final int speed = 3;
     
     private Vector2 vel = new Vector2(0, 0);
 
@@ -37,7 +37,7 @@ public class Player extends KinematicBody2D {
             vel.y -= 1;
         }
 
-        applyVelocity(vel);
+        moveAndSlide(vel.multiplyAll(speed));
     }
 
     @Override
