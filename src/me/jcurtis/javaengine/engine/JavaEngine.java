@@ -21,14 +21,12 @@ public class JavaEngine {
 
     public void initialize() {
         for (Node n : nodes) {
-            System.out.println("found " + n.getType());
             if (n.getType().equals(NodeType.COLLISIONRECT)) {
                 CollisionRect2D cr = (CollisionRect2D) n;
                 colliders.add(cr);
             }
 
             if (n.getType().equals(NodeType.CAMERA2D)) {
-                System.out.println("found main cam");
                 mainCamera = (Camera2D) n;
             }
         }

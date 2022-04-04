@@ -9,5 +9,7 @@ public enum NodeType {
     CAMERA2D,
     TILEMAP,
     CELL,
-    LINE2D
+    LINE2D,
+    TIMER,
+    ANIMATEDSPRITE
 }
