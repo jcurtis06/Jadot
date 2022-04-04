@@ -18,17 +18,6 @@ public class CollisionRect2D extends Node {
         this.height = height;
     }
 
-    public boolean checkCollisions() {
-        for (CollisionRect2D other : JavaEngine.colliders) {
-            if (other == this) continue;
-            if (this.getBounds().intersects(other.getBounds())) {
-                this.collided = other;
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean checkCollisionsAt(Vector2 newPos) {
         int x2 = newPos.getX(), y2 = newPos.getY();
 
