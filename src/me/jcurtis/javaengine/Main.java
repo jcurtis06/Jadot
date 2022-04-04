@@ -18,8 +18,9 @@ public class Main extends JavaEngine {
 
         int[][] map =
         {
-            {0, 0, 0, 0, 0, 0, 0},
-            {1, 1, 1, 1, 1, 1, 1},
+            {1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
+            {1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
+            {1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
         };
 
         ArrayList<String> tiles = new ArrayList<>();
@@ -30,13 +31,9 @@ public class Main extends JavaEngine {
         world.generateTiles();
 
         Player player = new Player();
-        player.setPos(new Vector2(-32, 0));
-
-        Poop poop = new Poop();
-        poop.setPos(new Vector2(0, 100));
+        player.setPos(new Vector2(0, -32));
 
         root.addChild(player);
-        root.addChild(poop);
         root.addChild(world);
 
         engine.initialize();

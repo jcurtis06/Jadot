@@ -32,6 +32,8 @@ public class JavaEngine {
                 mainCamera = (Camera2D) n;
             }
         }
+
+        System.out.println(colliders.size());
     }
 
     public void initializeWindow(Window window) {
