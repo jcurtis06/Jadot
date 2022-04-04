@@ -10,7 +10,7 @@ import me.jcurtis.javaengine.engine.utils.Vector2;
 import java.awt.event.*;
 
 public class Player extends KinematicBody2D {
-    final int speed = 3;
+    final int speed = 1;
     
     private Vector2 vel = new Vector2(0, 0);
 

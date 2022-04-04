@@ -29,7 +29,6 @@ public class CollisionRect2D extends Node {
             }
 
             if (cr2d.getBounds().intersects(future)) {
-                System.out.println("OH NO!");
                 return true;
             }
         }

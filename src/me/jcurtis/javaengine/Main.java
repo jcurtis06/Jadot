@@ -30,7 +30,7 @@ public class Main extends JavaEngine {
         world.generateTiles();
 
         Player player = new Player();
-        player.setPos(new Vector2(0, 50));
+        player.setPos(new Vector2(-32, 0));
 
         Poop poop = new Poop();
         poop.setPos(new Vector2(0, 100));

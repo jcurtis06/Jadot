@@ -30,7 +30,7 @@ public class Vector2 {
     }
 
     public Vector2 normalized() {
-        if (this.x == 0 && this.y == 0) return new Vector2(0, 0);
+        if (x == 0 && y == 0) return new Vector2(0, 0);
         double magnitude = this.magnitude();
         return new Vector2(this.x /= magnitude, this.y /= magnitude);
     }

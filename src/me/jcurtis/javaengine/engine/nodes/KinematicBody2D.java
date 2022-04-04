@@ -14,20 +14,52 @@ public class KinematicBody2D extends Node {
     }
 
     private void applyVelocity(Vector2 velocity) {
-        Vector2 newPos = new Vector2(this.pos.getX() + velocity.x, this.pos.getY() + velocity.y);
+        if (velocity.x > 0) {
+            // right
+            for (int i = 0; i <= velocity.getX(); i++) {
+                if (checkCollisions(new Vector2(this.pos.x + 1, this.pos.y))) return;
+                
+                this.pos.x += 1;
+            }
+        }
+        
+        if (velocity.x < 0) {
+            // left
+            for (int i = 0; i <= Math.abs(velocity.getX()); i++) {
+                if (checkCollisions(new Vector2(this.pos.x - 1, this.pos.y))) return;
 
-        for (CollisionRect2D myCollider : collisionRect2Ds) {
-            if (myCollider.checkCollisionsAt(newPos)) {
-                colliding = true;
-                System.out.println("colliding");
-            } else {
-                colliding = false;
+                this.pos.x -= 1;
             }
         }
 
-        if (!colliding) {
-            this.setPos(this.pos.addVec(velocity));
+        if (velocity.y > 0) {
+            // down
+            for (int i = 0; i <= Math.abs(velocity.getY()); i++) {
+                if (checkCollisions(new Vector2(this.pos.x, this.pos.y + 1))) return;
+
+                this.pos.y += 1;
+            }
+        } 
+        
+        if (velocity.y < 0) {
+            // up
+            for (int i = 0; i <= Math.abs(velocity.getY()); i++) {
+                if (checkCollisions(new Vector2(this.pos.x, this.pos.y - 1))) return;
+
+                this.pos.y -= 1;
+            }
         }
+    }
+
+    private boolean checkCollisions(Vector2 newPos) {
+        for (CollisionRect2D myCollider : collisionRect2Ds) {
+            if (myCollider.checkCollisionsAt(newPos)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     public void move(Vector2 velocity) {
