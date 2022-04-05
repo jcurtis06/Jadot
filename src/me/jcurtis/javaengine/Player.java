@@ -18,8 +18,11 @@ public class Player extends KinematicBody2D {
     final int jumpForce = 3;
     
     private Vector2 vel = new Vector2(0, 0);
+    public boolean dead = false;
+    private boolean jumping = false;
+
     private AnimatedSprite animatedSprite;
-    private boolean dead = false;
+    private CollisionShape2D cs2d;
 
     @Override
     public void update() {
@@ -28,6 +31,14 @@ public class Player extends KinematicBody2D {
         gravity();
         
         vel = moveAndSlide(vel, Direction.UP);
+
+        if (jumping && vel.y != 0) {
+            animatedSprite.play("jump");
+        }
+
+        if (isOnFloor) {
+            jumping = false;
+        }
 
         if (dead) {
             animatedSprite.play("death");
@@ -57,6 +68,7 @@ public class Player extends KinematicBody2D {
         if (isOnFloor) {
             vel.y = -jumpForce;
             animatedSprite.play("jump");
+            jumping = true;
         }
     }
 
@@ -67,6 +79,7 @@ public class Player extends KinematicBody2D {
     public void kill() {
         vel.y = jumpForce;
         dead = true;
+        this.enabled = false;
     }
 
     @Override
@@ -74,7 +87,7 @@ public class Player extends KinematicBody2D {
         super.onTreeEnter();
 
         Camera2D playerCamera = new Camera2D(500, 500);
-        playerCamera.setOffset(new Vector2(-360/2, -240/2));
+        playerCamera.setOffset(new Vector2((-360+16)/2, (-240+16)/2));
         this.addChild(playerCamera);
 
         getTreeRoot().setMainCamera(playerCamera);
@@ -82,7 +95,7 @@ public class Player extends KinematicBody2D {
         this.animatedSprite = new AnimatedSprite(new SpriteFrames("death", 100, "images/mario/mario_death.png"), new SpriteFrames("jump", 100, "images/mario/mario_jump.png"), new SpriteFrames("idle", 100, "images/mario/mario_idle.png"), new SpriteFrames("run", 100, "images/mario/mario_run.png", "images/mario/mario_run_1.png", "images/mario/mario_run_2.png"));
         this.addChild(animatedSprite);
 
-        CollisionShape2D cs2d = new CollisionShape2D(ColliderType.RECTANGLE, 16, 16);
+        cs2d = new CollisionShape2D(ColliderType.RECTANGLE, 16, 16);
         this.addChild(cs2d);
 
         this.setLayer(1);

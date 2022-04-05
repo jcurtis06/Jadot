@@ -2,6 +2,8 @@ package me.jcurtis.javaengine.engine.nodes;
 
 import javax.imageio.ImageIO;
 
+import me.jcurtis.javaengine.engine.JavaEngine;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;

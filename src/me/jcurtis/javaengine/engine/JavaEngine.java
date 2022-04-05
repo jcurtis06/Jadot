@@ -12,8 +12,9 @@ import java.util.ArrayList;
 public class JavaEngine {
     public Window window;
 
-    public static final ArrayList<Node> nodes = new ArrayList<>();
-    public static final ArrayList<Body> colliders = new ArrayList<>();
+    public static ArrayList<Node> nodes = new ArrayList<>();
+    public static ArrayList<Node> nodesForRemoval = new ArrayList<>();
+    public static ArrayList<Body> colliders = new ArrayList<>();
     public static Camera2D mainCamera = null;
 
     public static void registerNode(Node node) {
@@ -38,6 +39,9 @@ public class JavaEngine {
     }
 
     public void update() {
+        if (!nodesForRemoval.isEmpty()) {
+            nodes.removeAll(nodesForRemoval);
+        }
         for (Node node : nodes) {
             node.update();
         }

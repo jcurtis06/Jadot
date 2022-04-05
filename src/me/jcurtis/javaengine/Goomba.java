@@ -10,11 +10,13 @@ import me.jcurtis.javaengine.engine.nodes.collisions.KinematicBody2D;
 import me.jcurtis.javaengine.engine.nodes.noderesources.AI;
 import me.jcurtis.javaengine.engine.nodes.noderesources.AIType;
 import me.jcurtis.javaengine.engine.utils.Direction;
+import me.jcurtis.javaengine.engine.utils.Vector2;
 
 public class Goomba extends KinematicBody2D {
     private AI ai;
     private Sprite sprite;
-    private Area2D a2d;
+    private Area2D killBox;
+    private Area2D head;
     private CollisionShape2D cs2Shape2d;
 
     @Override
@@ -23,10 +25,20 @@ public class Goomba extends KinematicBody2D {
         velocity.y += 0.1;
         velocity = moveAndSlide(velocity, Direction.UP);
 
-        if (a2d.onBodyEntered() != null && a2d.onBodyEntered().getParent().getName() == "Player") {
-            Player player = (Player) a2d.onBodyEntered().getParent();
-            player.kill();
+        if (killBox.onBodyEntered() != null && killBox.onBodyEntered().getName() == "Player") {
+            System.out.println("reaeched");
+            Player player = (Player) killBox.onBodyEntered();
+            if (player.dead == false) player.kill();
         }
+
+        if (head.onBodyEntered() != null && head.onBodyEntered().getName() == "Player") {
+            System.out.println("UH OH STANKy");
+            kill();
+        }
+    }
+
+    public void kill() {
+        queueFree();
     }
 
     @Override
@@ -39,12 +51,20 @@ public class Goomba extends KinematicBody2D {
         sprite = new Sprite("images/goomba/goomba.png");
         this.addChild(sprite);
 
-        a2d = new Area2D();
-        a2d.setName("GoombaHitBox");
-        a2d.addChild(new CollisionShape2D(ColliderType.RECTANGLE, 16, 16));
-        a2d.setLayer(3);
-        a2d.setMask(1);
-        this.addChild(a2d);
+        killBox = new Area2D();
+        killBox.setName("GoombaHitBox");
+        killBox.addChild(new CollisionShape2D(ColliderType.RECTANGLE, 16, 15));
+        killBox.setLayer(3);
+        killBox.setMask(1);
+        this.addChild(killBox);
+
+        head = new Area2D();
+        head.setName("GoombaHead");
+        head.addChild(new CollisionShape2D(ColliderType.RECTANGLE, 16, 17));
+        head.setOffset(new Vector2(0, -16));
+        head.setLayer(4);
+        head.setMask(1);
+        this.addChild(head);
 
         CollisionShape2D cs2d = new CollisionShape2D(ColliderType.RECTANGLE, 16, 16);
         this.addChild(cs2d);

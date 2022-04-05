@@ -42,7 +42,7 @@ public class Main extends JavaEngine {
         player.setPos(new Vector2(0, -32));
 
         Goomba goomba = new Goomba();
-        goomba.setPos(new Vector2(16, -32));
+        goomba.setPos(new Vector2(16, 0));
 
         root.addChild(player);
         root.addChild(goomba);

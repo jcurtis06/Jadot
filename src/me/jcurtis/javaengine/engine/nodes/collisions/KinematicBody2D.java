@@ -16,6 +16,8 @@ public class KinematicBody2D extends Body {
     public boolean isOnFloor = false;
     public Vector2 velocity = new Vector2(0, 0);
 
+    public boolean enabled = true;
+
     /**
      * A node that can interact with collisions. Often used for player characters.
      */
@@ -99,6 +101,7 @@ public class KinematicBody2D extends Body {
     }
 
     private boolean checkCollisions(Vector2 newPos) {
+        if (!enabled) return false;
         if (getCollider() == null) return false;
         Body cs2d = checkCollisionsAt(newPos);
         if (cs2d != null) return true;

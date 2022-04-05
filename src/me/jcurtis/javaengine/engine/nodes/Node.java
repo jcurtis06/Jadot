@@ -52,7 +52,15 @@ public class Node {
     }
 
     public void removeChild(Node node) {
+        if (!node.getChildren().isEmpty()) {
+            for (Node n : node.getChildren()) {
+                children.remove(n);
+                JavaEngine.nodesForRemoval.add(n);
+            }
+        }
+        
         children.remove(node);
+        JavaEngine.nodesForRemoval.add(node);
     }
 
     public void removeChild(int index) {
