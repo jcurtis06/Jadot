@@ -18,6 +18,12 @@ public class Main extends JavaEngine {
 
         int[][] map =
         {
+            {0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0,},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+            {0, 0, 0, 0, 0, 2, 3, 2, 0, 0, 0, 0, 0, 0, 0,},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,},
@@ -25,7 +31,9 @@ public class Main extends JavaEngine {
 
         ArrayList<String> tiles = new ArrayList<>();
         tiles.add("");
-        tiles.add("images/grass1.png");
+        tiles.add("images/tiles/block.png");
+        tiles.add("images/tiles/brick.png");
+        tiles.add("images/tiles/item_block.png");
 
         Tilemap world = new Tilemap(16, map, tiles);
         world.generateTiles();
@@ -33,13 +41,17 @@ public class Main extends JavaEngine {
         Player player = new Player();
         player.setPos(new Vector2(0, -32));
 
+        Goomba goomba = new Goomba();
+        goomba.setPos(new Vector2(16, -32));
+
         root.addChild(player);
+        root.addChild(goomba);
         root.addChild(world);
 
         engine.initialize();
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                engine.initializeWindow(new Window("Test", false, 500, 500));
+                engine.initializeWindow(new Window("Test", true, 500, 500));
             }
         });
     }

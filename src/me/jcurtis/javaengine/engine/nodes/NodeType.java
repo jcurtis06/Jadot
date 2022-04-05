@@ -4,12 +4,13 @@ public enum NodeType {
     NODE,
     SPRITE,
     KINEMATICBODY2D,
-    COLLISIONRECT,
     ROOT,
     CAMERA2D,
     TILEMAP,
     CELL,
-    LINE2D,
-    TIMER,
-    ANIMATEDSPRITE
+    ANIMATEDSPRITE,
+    AI,
+    AREA2D,
+    COLLISIONSHAPE2D,
+    STATICBODY2D
 }

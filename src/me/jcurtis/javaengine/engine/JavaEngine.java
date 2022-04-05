@@ -1,9 +1,10 @@
 package me.jcurtis.javaengine.engine;
 
 import me.jcurtis.javaengine.engine.nodes.Camera2D;
-import me.jcurtis.javaengine.engine.nodes.CollisionRect2D;
 import me.jcurtis.javaengine.engine.nodes.Node;
 import me.jcurtis.javaengine.engine.nodes.NodeType;
+import me.jcurtis.javaengine.engine.nodes.collisions.Body;
+import me.jcurtis.javaengine.engine.nodes.collisions.CollisionShape2D;
 import me.jcurtis.javaengine.engine.window.Window;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class JavaEngine {
     public Window window;
 
     public static final ArrayList<Node> nodes = new ArrayList<>();
-    public static final ArrayList<CollisionRect2D> colliders = new ArrayList<>();
+    public static final ArrayList<Body> colliders = new ArrayList<>();
     public static Camera2D mainCamera = null;
 
     public static void registerNode(Node node) {
@@ -21,8 +22,8 @@ public class JavaEngine {
 
     public void initialize() {
         for (Node n : nodes) {
-            if (n.getType().equals(NodeType.COLLISIONRECT)) {
-                CollisionRect2D cr = (CollisionRect2D) n;
+            if (n instanceof Body) {
+                Body cr = (Body) n;
                 colliders.add(cr);
             }
 
@@ -30,8 +31,6 @@ public class JavaEngine {
                 mainCamera = (Camera2D) n;
             }
         }
-
-        System.out.println(colliders.size());
     }
 
     public void initializeWindow(Window window) {

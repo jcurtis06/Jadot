@@ -1,28 +1,36 @@
-package me.jcurtis.javaengine.engine.nodes;
+package me.jcurtis.javaengine.engine.nodes.collisions;
 
-import java.util.ArrayList;
-
+import me.jcurtis.javaengine.engine.JavaEngine;
+import me.jcurtis.javaengine.engine.nodes.Node;
+import me.jcurtis.javaengine.engine.nodes.NodeType;
 import me.jcurtis.javaengine.engine.utils.Direction;
 import me.jcurtis.javaengine.engine.utils.Vector2;
 
-public class KinematicBody2D extends Node {
-    private ArrayList<CollisionRect2D> collisionRect2Ds = new ArrayList<>();
+import java.awt.Rectangle;
+
+public class KinematicBody2D extends Body {
     private boolean collidingX = false;
     private boolean collidingY = false;
-    
-    public boolean isOnFloor = false;
 
+    public Direction collidedDir = Direction.NONE;
+    public boolean isOnFloor = false;
+    public Vector2 velocity = new Vector2(0, 0);
+
+    /**
+     * A node that can interact with collisions. Often used for player characters.
+     */
     public KinematicBody2D() {
         super(NodeType.KINEMATICBODY2D);
-        if (collisionRect2Ds == null) System.out.println("WARNING: KinematicBody2D doesn't have a CollisionRect2D!");
     }
 
     private void applyVelocity(Vector2 velocity, Direction upwards) {
+        this.velocity = velocity;
         if (velocity.x > 0) {
             // right
             for (int i = 0; i <= velocity.getX(); i++) {
                 if (checkCollisions(new Vector2(this.pos.x + 1, this.pos.y))) {
                     collidingX = true;
+                    collidedDir = Direction.RIGHT;
                     return;
                 }
                 collidingX = false;
@@ -35,6 +43,7 @@ public class KinematicBody2D extends Node {
             for (int i = 0; i <= Math.abs(velocity.getX()); i++) {
                 if (checkCollisions(new Vector2(this.pos.x - 1, this.pos.y))) {
                     collidingX = true;
+                    collidedDir = Direction.LEFT;
                     return;
                 }
                 collidingX = false;
@@ -76,26 +85,10 @@ public class KinematicBody2D extends Node {
         }
     }
 
-    private boolean checkCollisions(Vector2 newPos) {
-        for (CollisionRect2D myCollider : collisionRect2Ds) {
-            if (myCollider.checkCollisionsAt(newPos)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
-    }
-
     public void move(Vector2 velocity, Direction up) {
         applyVelocity(velocity, up);
     }
-    /* this needs to return the projected velocity
-    if we collide, it should be a vector 2 of 0,0
-    if we don't collide, it should just return the inputted velocity
-
-    How...? idk.
-    */
+    
     public Vector2 moveAndSlide(Vector2 velocity, Direction up) {
         applyVelocity(new Vector2(velocity.x, 0), up);
         applyVelocity(new Vector2(0, velocity.y), up);
@@ -105,11 +98,32 @@ public class KinematicBody2D extends Node {
         else return velocity;
     }
 
+    private boolean checkCollisions(Vector2 newPos) {
+        if (getCollider() == null) return false;
+        Body cs2d = checkCollisionsAt(newPos);
+        if (cs2d != null) return true;
+        return false;
+    }
+
+    private Body checkCollisionsAt(Vector2 newPos) {
+        int x2 = newPos.getX(), y2 = newPos.getY();
+        Rectangle future = new Rectangle(x2, y2, getCollider().width, getCollider().height);
+
+        for (Body c : JavaEngine.colliders) {
+            if (c == this || c.getType().equals(NodeType.AREA2D)) continue;
+            if (c.getCollider().getBounds().intersects(future)) {
+                if (!this.getMask().contains(c.getLayer())) continue;
+                return c;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void addChild(Node node) {
         super.addChild(node);
-        if (node.getType().equals(NodeType.COLLISIONRECT)) {
-            collisionRect2Ds.add((CollisionRect2D) node);
+        if (node.getType().equals(NodeType.COLLISIONSHAPE2D)) {
+            setCollider((CollisionShape2D) node);
         }
     }
 }

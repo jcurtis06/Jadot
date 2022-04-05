@@ -47,6 +47,10 @@ public class Node {
         return this.children;
     }
 
+    public void queueFree() {
+        this.getParent().removeChild(this);
+    }
+
     public void removeChild(Node node) {
         children.remove(node);
     }

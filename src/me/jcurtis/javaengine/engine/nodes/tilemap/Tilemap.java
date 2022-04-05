@@ -2,9 +2,11 @@ package me.jcurtis.javaengine.engine.nodes.tilemap;
 
 import java.util.ArrayList;
 
-import me.jcurtis.javaengine.engine.nodes.CollisionRect2D;
 import me.jcurtis.javaengine.engine.nodes.Node;
 import me.jcurtis.javaengine.engine.nodes.NodeType;
+import me.jcurtis.javaengine.engine.nodes.collisions.ColliderType;
+import me.jcurtis.javaengine.engine.nodes.collisions.CollisionShape2D;
+import me.jcurtis.javaengine.engine.nodes.collisions.StaticBody2D;
 import me.jcurtis.javaengine.engine.utils.Vector2;
 
 public class Tilemap extends Node {
@@ -29,8 +31,11 @@ public class Tilemap extends Node {
                 if ((i>0 && j>0 && i<map.length-1 && j<map[0].length-1 && map[i-1][j-1]+map[i][j-1]+map[i+1][j-1]+map[i-1][j]+map[i+1][j]+map[i-1][j+1]+map[i][j+1]+map[i+1][j+1] > 8) || map[i][j] == 0) {
                     continue;
                 }
-                CollisionRect2D collision = new CollisionRect2D(cellSize, cellSize);
-                collision.setName("TileMap X: " + i + " Y: " + j);
+                
+                StaticBody2D collision = new StaticBody2D();
+                collision.setLayer(0);
+                collision.addChild(new CollisionShape2D(ColliderType.RECTANGLE, cellSize, cellSize));
+
                 cell.addChild(collision);
             }
         }
