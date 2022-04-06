@@ -33,22 +33,42 @@ public class Sprite extends Node {
     }
 
     public void draw(Graphics g, ImageObserver observer) {
-        if (!flipped) {
-            g.drawImage(
-                sprite,
-                pos.getX() - getTreeRoot().getMainCamera().getPos().getX(),
-                pos.getY() - getTreeRoot().getMainCamera().getPos().getY(),
-                observer
-            );
+        if (getTreeRoot().getMainCamera() != null) {
+            if (!flipped) {
+                g.drawImage(
+                        sprite,
+                        pos.getX() - getTreeRoot().getMainCamera().getPos().getX(),
+                        pos.getY() - getTreeRoot().getMainCamera().getPos().getY(),
+                        observer
+                );
+            } else {
+                g.drawImage(
+                        sprite,
+                        pos.getX() - getTreeRoot().getMainCamera().getPos().getX() + sprite.getWidth(),
+                        pos.getY() - getTreeRoot().getMainCamera().getPos().getY(),
+                        -sprite.getWidth(),
+                        sprite.getHeight(),
+                        observer
+                );
+            }
         } else {
-            g.drawImage(
-                sprite,
-                pos.getX() - getTreeRoot().getMainCamera().getPos().getX() + sprite.getWidth(),
-                pos.getY() - getTreeRoot().getMainCamera().getPos().getY(),
-                -sprite.getWidth(),
-                sprite.getHeight(),
-                observer
-            );
+            if (!flipped) {
+                g.drawImage(
+                        sprite,
+                        pos.getX(),
+                        pos.getY(),
+                        observer
+                );
+            } else {
+                g.drawImage(
+                        sprite,
+                        pos.getX(),
+                        pos.getY(),
+                        -sprite.getWidth(),
+                        sprite.getHeight(),
+                        observer
+                );
+            }
         }
     }
 
