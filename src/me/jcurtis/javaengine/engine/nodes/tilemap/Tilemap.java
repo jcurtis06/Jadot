@@ -28,7 +28,9 @@ public class Tilemap extends Node {
     }
 
     public void addTiles(String... resource) {
-        this.res.addAll(Arrays.asList(resource));
+        for (String s : resource) {
+            this.res.add(s);
+        }
     }
 
     public ArrayList<String> getTiles() {
