@@ -10,10 +10,12 @@ import me.jcurtis.javaengine.engine.input.Input;
 import me.jcurtis.javaengine.engine.nodes.Node;
 import me.jcurtis.javaengine.engine.nodes.NodeType;
 import me.jcurtis.javaengine.engine.nodes.Sprite;
+import me.jcurtis.javaengine.engine.utils.Vector2;
 
 public class Viewport extends JPanel implements ActionListener {
     private Timer timer;
     private JavaEngine engine;
+    private Vector2 scale = new Vector2(1, 1);
 
     public Viewport(JavaEngine engine) {
         this.engine = engine;
@@ -25,6 +27,14 @@ public class Viewport extends JPanel implements ActionListener {
         addKeyListener(new Input());
     }
 
+    public void setScale(Vector2 scale) {
+        this.scale = scale;
+    }
+
+    public Vector2 getScale() {
+        return this.scale;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -32,7 +42,7 @@ public class Viewport extends JPanel implements ActionListener {
         Graphics2D g2d = (Graphics2D) g;
 
         AffineTransform at = new AffineTransform();
-        at.scale(2, 2);
+        at.scale(scale.getX(), scale.getY());
 
         g2d.transform(at);
 
