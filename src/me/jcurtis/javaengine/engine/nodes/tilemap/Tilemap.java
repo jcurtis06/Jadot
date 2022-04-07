@@ -12,16 +12,42 @@ import me.jcurtis.javaengine.engine.utils.Vector2;
 public class Tilemap extends Node {
     private int[][] map;
     private ArrayList<String> res;
-    private int cellSize;
+    private int cellSize = 0;
 
-    public Tilemap(int cellSize, int[][] map, ArrayList<String> resources) {
+    public Tilemap() {
         super(NodeType.TILEMAP);
-        this.map = map;
-        this.res = resources;
-        this.cellSize = cellSize;
     }
-    
+
+    public void setMap(int[][] map) {
+        this.map = map;
+    }
+
+    public int[][] getMap() {
+        return map;
+    }
+
+    public void setTiles(ArrayList<String> resources) {
+        this.res = resources;
+    }
+
+    public ArrayList<String> getTiles() {
+        return this.res;
+    }
+
+    public void setCellSize(int size) {
+        this.cellSize = size;
+    }
+
+    public int getCellSize() {
+        return this.cellSize;
+    }
+
     public void generateTiles() {
+        if (map == null || cellSize == 0 || res.isEmpty()) {
+            System.out.println("TileMap is missing required parameters");
+            System.out.println("*did you remember to setCellSize(int size), setTiles(ArrayList<String> resources), and setMap(int[][] map)?");
+        }
+
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
                 Cell cell = new Cell(res.get(map[i][j]));

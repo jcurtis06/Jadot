@@ -24,7 +24,7 @@ public class Window {
         JFrame window = new JFrame(title);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        window.setSize(720, 480);
+        window.setSize(this.width, this.height);
         window.setResizable(this.resizeable);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
