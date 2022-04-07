@@ -12,6 +12,8 @@ public class Window {
     int width;
     int height;
 
+    public static Viewport viewport;
+
     public Window(String title, boolean resizeable, int width, int height) {
         this.title = title;
         this.resizeable = resizeable;
@@ -29,7 +31,7 @@ public class Window {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        Viewport viewport = new Viewport(engine);
+        viewport = new Viewport(engine);
         window.add(viewport);
         window.addKeyListener(new Input());
 
