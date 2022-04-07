@@ -12,7 +12,7 @@ import me.jcurtis.javaengine.engine.utils.Vector2;
 
 public class Tilemap extends Node {
     private int[][] map;
-    private ArrayList<String> res;
+    private ArrayList<String> res = new ArrayList<>();
     private int cellSize = 0;
 
     public Tilemap() {
