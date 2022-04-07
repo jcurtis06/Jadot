@@ -11,7 +11,7 @@ import java.awt.Rectangle;
 public class KinematicBody2D extends Body {
     private boolean collidingX = false;
     private boolean collidingY = false;
-    private Area2D collidedArea = null;
+    public Area2D collidedArea = null;
 
     public Direction collidedDir = Direction.NONE;
     public boolean isOnFloor = false;
@@ -104,7 +104,6 @@ public class KinematicBody2D extends Body {
     private boolean checkCollisions(Vector2 newPos) {
         if (!enabled) return false;
         if (getCollider() == null) {
-            this.collidedArea = null;
             return false;
         }
         Body cs2d = checkCollisionsAt(newPos);
@@ -123,6 +122,7 @@ public class KinematicBody2D extends Body {
             if (c.getCollider().getBounds().intersects(future)) {
                 if (!this.getMask().contains(c.getLayer())) continue;
                 if (c.getType().equals(NodeType.AREA2D)) {
+                    collidedArea = (Area2D) c;
                     onArea2DEntered();
                     continue;
                 }
