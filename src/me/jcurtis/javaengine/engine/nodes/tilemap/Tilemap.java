@@ -1,6 +1,7 @@
 package me.jcurtis.javaengine.engine.nodes.tilemap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import me.jcurtis.javaengine.engine.nodes.Node;
 import me.jcurtis.javaengine.engine.nodes.NodeType;
@@ -27,9 +28,7 @@ public class Tilemap extends Node {
     }
 
     public void addTiles(String... resource) {
-        for (String s : resource) {
-            this.res.add(s);
-        }
+        this.res.addAll(Arrays.asList(resource));
     }
 
     public ArrayList<String> getTiles() {
