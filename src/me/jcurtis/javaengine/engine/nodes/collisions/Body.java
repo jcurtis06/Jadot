@@ -22,6 +22,10 @@ public class Body extends Node {
         }
     }
 
+    public void setMask(ArrayList<Integer> mask) {
+        this.mask = mask;
+    }
+
     public void setLayer(int index) {
         this.layer = index;
         this.mask.add(index);

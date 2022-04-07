@@ -1,5 +1,6 @@
 package me.jcurtis.javaengine.engine.nodes;
 
+import me.jcurtis.javaengine.engine.JavaEngine;
 import me.jcurtis.javaengine.engine.utils.Vector2;
 import me.jcurtis.javaengine.engine.window.Window;
 
@@ -16,7 +17,7 @@ public class Camera2D extends Node {
     }
 
     public void setZoom(Vector2 vector2) {
-        Window.viewport.setScale(vector2);
+        JavaEngine.window.viewport.setScale(vector2);
         this.zoom = vector2;
     }
 

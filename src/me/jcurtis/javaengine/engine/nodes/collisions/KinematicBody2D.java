@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 public class KinematicBody2D extends Body {
     private boolean collidingX = false;
     private boolean collidingY = false;
+    private Area2D collidedArea = null;
 
     public Direction collidedDir = Direction.NONE;
     public boolean isOnFloor = false;
@@ -102,9 +103,14 @@ public class KinematicBody2D extends Body {
 
     private boolean checkCollisions(Vector2 newPos) {
         if (!enabled) return false;
-        if (getCollider() == null) return false;
+        if (getCollider() == null) {
+            this.collidedArea = null;
+            return false;
+        }
         Body cs2d = checkCollisionsAt(newPos);
-        if (cs2d != null) return true;
+        if (cs2d != null) {
+            return true;
+        }
         return false;
     }
 
@@ -113,9 +119,13 @@ public class KinematicBody2D extends Body {
         Rectangle future = new Rectangle(x2, y2, getCollider().width, getCollider().height);
 
         for (Body c : JavaEngine.colliders) {
-            if (c == this || c.getType().equals(NodeType.AREA2D)) continue;
+            if (c == this) continue;
             if (c.getCollider().getBounds().intersects(future)) {
                 if (!this.getMask().contains(c.getLayer())) continue;
+                if (c.getType().equals(NodeType.AREA2D)) {
+                    onArea2DEntered();
+                    continue;
+                }
                 return c;
             }
         }
@@ -128,5 +138,9 @@ public class KinematicBody2D extends Body {
         if (node.getType().equals(NodeType.COLLISIONSHAPE2D)) {
             setCollider((CollisionShape2D) node);
         }
+    }
+
+    public void onArea2DEntered() {
+
     }
 }

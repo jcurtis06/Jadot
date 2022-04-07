@@ -10,7 +10,7 @@ import me.jcurtis.javaengine.engine.window.Window;
 import java.util.ArrayList;
 
 public class JavaEngine {
-    public Window window;
+    public static Window window;
 
     public static ArrayList<Node> nodes = new ArrayList<>();
     public static ArrayList<Node> nodesForRemoval = new ArrayList<>();
@@ -34,7 +34,8 @@ public class JavaEngine {
         }
     }
 
-    public void initializeWindow(Window window) {
+    public void initializeWindow(Window windowObj) {
+        window = windowObj;
         window.init(this);
     }
 

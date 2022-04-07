@@ -3,16 +3,19 @@ package me.jcurtis.javaengine.engine.window;
 import javax.swing.*;
 import me.jcurtis.javaengine.engine.JavaEngine;
 import me.jcurtis.javaengine.engine.input.Input;
+import me.jcurtis.javaengine.engine.utils.Vector2;
 
 
 public class Window {
     String title;
     boolean resizeable;
 
+    Vector2 scale = new Vector2(1, 1);
+
     int width;
     int height;
 
-    public static Viewport viewport;
+    public Viewport viewport;
 
     public Window(String title, boolean resizeable, int width, int height) {
         this.title = title;
@@ -20,6 +23,10 @@ public class Window {
 
         this.width = width;
         this.height = height;
+    }
+
+    public void setScale(Vector2 scale) {
+        this.scale = scale;
     }
 
     public JFrame init(JavaEngine engine) {
@@ -31,8 +38,9 @@ public class Window {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        viewport = new Viewport(engine);
-        window.add(viewport);
+        this.viewport = new Viewport(engine);
+        this.viewport.setScale(scale);
+        window.add(this.viewport);
         window.addKeyListener(new Input());
 
         return window;
