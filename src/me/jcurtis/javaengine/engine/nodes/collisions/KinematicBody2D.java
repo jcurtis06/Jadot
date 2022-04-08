@@ -12,6 +12,7 @@ public class KinematicBody2D extends Body {
     private boolean collidingX = false;
     private boolean collidingY = false;
     public Area2D collidedArea = null;
+    public Body collidedBody = null;
 
     public Direction collidedDir = Direction.NONE;
     public boolean isOnFloor = false;
@@ -126,6 +127,8 @@ public class KinematicBody2D extends Body {
                     onArea2DEntered();
                     continue;
                 }
+                collidedBody = c;
+                onBodyEntered();
                 return c;
             }
         }
@@ -141,6 +144,10 @@ public class KinematicBody2D extends Body {
     }
 
     public void onArea2DEntered() {
+
+    }
+
+    public void onBodyEntered() {
 
     }
 }
