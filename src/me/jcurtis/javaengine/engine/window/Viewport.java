@@ -7,6 +7,7 @@ import java.awt.geom.AffineTransform;
 
 import me.jcurtis.javaengine.engine.JavaEngine;
 import me.jcurtis.javaengine.engine.input.Input;
+import me.jcurtis.javaengine.engine.nodes.Line2D;
 import me.jcurtis.javaengine.engine.nodes.Node;
 import me.jcurtis.javaengine.engine.nodes.NodeType;
 import me.jcurtis.javaengine.engine.nodes.Sprite;
@@ -50,6 +51,9 @@ public class Viewport extends JPanel implements ActionListener {
             if (node.getType() == NodeType.SPRITE) {
                 Sprite sprite = (Sprite) node;
                 sprite.draw(g, this);
+            } else if (node.getType() == NodeType.LINE2D) {
+                Line2D line = (Line2D) node;
+                line.draw(g, this);
             }
         }
     }

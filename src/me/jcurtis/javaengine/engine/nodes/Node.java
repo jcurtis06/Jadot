@@ -114,4 +114,8 @@ public class Node {
     public Vector2 getScreenPos() {
         return null;
     }
+
+    public void ready() {
+
+    }
 }

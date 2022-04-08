@@ -5,6 +5,8 @@ import me.jcurtis.javaengine.engine.JavaEngine;
 import me.jcurtis.javaengine.engine.input.Input;
 import me.jcurtis.javaengine.engine.utils.Vector2;
 
+import java.awt.*;
+
 
 public class Window {
     String title;
@@ -40,6 +42,7 @@ public class Window {
 
         this.viewport = new Viewport(engine);
         this.viewport.setScale(scale);
+        this.viewport.setBackground(Color.BLACK);
         window.add(this.viewport);
         window.addKeyListener(new Input());
 

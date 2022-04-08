@@ -12,5 +12,6 @@ public enum NodeType {
     AI,
     AREA2D,
     COLLISIONSHAPE2D,
-    STATICBODY2D
+    STATICBODY2D,
+    LINE2D
 }
