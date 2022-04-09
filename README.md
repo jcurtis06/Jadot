@@ -3,4 +3,4 @@ I've always loved Java, and I've also always loved the Godot game engine... so I
 
 ## Examples
 *If you want you're example to be listed here, lemme know!*
-[Platformer by me](https://github.com/jcurtis06/JavaPlatformer)
+- [Platformer by me](https://github.com/jcurtis06/JavaPlatformer)
