@@ -1,6 +1,7 @@
 package me.jcurtis.javaengine.engine.nodes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -16,9 +17,12 @@ public class AnimatedSprite extends Sprite {
 
     public AnimatedSprite(SpriteFrames... animations) {
         super(null);
-        for (SpriteFrames sf : animations) {
-            spriteFrames.add(sf);
-        }
+        Collections.addAll(spriteFrames, animations);
+    }
+
+    public AnimatedSprite(ArrayList<SpriteFrames> spriteFrames) {
+        super(null);
+        this.spriteFrames.addAll(spriteFrames);
     }
 
     public void play(String animation) {
@@ -36,14 +40,12 @@ public class AnimatedSprite extends Sprite {
     }
 
     public void startLoop() {
-        Runnable loopFrames = new Runnable() {
-            public void run() {
-                loadImage(currentAnimation.images[frameIndex]);
-                if (frameIndex + 1 >= currentAnimation.images.length) {
-                    frameIndex = 0;
-                } else {
-                    frameIndex++;
-                }
+        Runnable loopFrames = () -> {
+            loadImage(currentAnimation.images[frameIndex]);
+            if (frameIndex + 1 >= currentAnimation.images.length) {
+                frameIndex = 0;
+            } else {
+                frameIndex++;
             }
         };
 
