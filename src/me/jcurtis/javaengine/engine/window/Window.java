@@ -17,14 +17,18 @@ public class Window {
     int width;
     int height;
 
+    Color backgroundColor;
+
     public Viewport viewport;
 
-    public Window(String title, boolean resizeable, int width, int height) {
+    public Window(String title, Color backgroundColor, boolean resizeable, int width, int height) {
         this.title = title;
         this.resizeable = resizeable;
 
         this.width = width;
         this.height = height;
+
+        this.backgroundColor = backgroundColor;
     }
 
     public void setScale(Vector2 scale) {
@@ -41,8 +45,8 @@ public class Window {
         window.setVisible(true);
 
         this.viewport = new Viewport(engine);
-        this.viewport.setScale(scale);
-        this.viewport.setBackground(Color.BLACK);
+        this.viewport.setScale(this.scale);
+        this.viewport.setBackground(this.backgroundColor);
         window.add(this.viewport);
         window.addKeyListener(new Input());
 
